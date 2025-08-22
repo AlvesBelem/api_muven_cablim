@@ -1,0 +1,4 @@
+CLIENT_ID=muven-api
+CLIENT_SECRET=<<seu client_secret>>
+API_USERNAME=<<seu usuário>>
+API_PASSWORD=<<sua senha>>
