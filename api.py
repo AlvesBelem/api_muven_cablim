@@ -1,12 +1,13 @@
+
 from fastapi import FastAPI, HTTPException
 from app.auth import obter_token
 from app.produtos import listar_produtos
 from app.estoque import buscar_sku
 from app.pedidos import criar_pedido
 from app.hooks import registrar_hook
+from app.categorias import obter_categorias
 
 app = FastAPI(title="API Muven Integrada", version="1.0.0")
-
 
 @app.get("/produtos")
 def get_produtos():
@@ -16,6 +17,13 @@ def get_produtos():
     produtos = listar_produtos(token)
     return produtos
 
+@app.get("/categorias")
+def listar_categorias():
+    token = obter_token()
+    if not token:
+        raise HTTPException(status_code=401, detail="Token inválido.")
+    categorias = obter_categorias(token)
+    return categorias
 
 @app.get("/estoque/{sku}")
 def get_estoque(sku: str):
